@@ -32,11 +32,11 @@ webmagic consists of two packages:
 
 * ** Webmagic-core **
 
-webmagic core part, only contains the basic modules and basic reptile extractor. webmagic-core goal is to become a textbook pages reptile-like implementation.
+webmagic core part, only contains the basic modules and basic crawler extractor. webmagic-core goal is to become a textbook pages crawler-like implementation.
 
 * ** Webmagic-extension **
 
-webmagic expansion module that provides some of the more convenient tool written in reptiles. Including annotation format definition reptiles, JSON, distributed and other support.
+webmagic expansion module that provides some of the more convenient tool written in crawlers. Including annotation format definition crawlers, JSON, distributed and other support.
 
 webmagic also includes two expansion packs available, because these two packages are dependent on a relatively heavyweight tool, it pulled out from the main package, these packages need to download the source code after compile it yourself:
 
@@ -64,7 +64,7 @@ In ** lib ** directory, there are all the project dependencies jar package, you 
 
 ### Custom PageProcessor
 
-PageProcessor is part webmagic-core, custom a PageProcessor to achieve their reptilian logic. The following is a piece of code to crawl osc blog:
+PageProcessor is part webmagic-core, custom a PageProcessor to achieve their crawlerian logic. The following is a piece of code to crawl osc blog:
 
 ```java
     public class OschinaBlogPageProcesser implements PageProcessor {
@@ -101,7 +101,7 @@ The main method of execution, you can see the results in the console crawl. webm
 
 #### Using annotations
 
-webmagic-extension includes a method for the preparation of reptiles annotation mode, simply based on a POJO annotated increase to complete a reptile. The following blog is still crawling oschina piece of code that is identical in functionality and OschinaBlogPageProcesser:
+webmagic-extension includes a method for the preparation of crawlers annotation mode, simply based on a POJO annotated increase to complete a crawler. The following blog is still crawling oschina piece of code that is identical in functionality and OschinaBlogPageProcesser:
 
 ```java
 	@TargetUrl("http://my.oschina.net/flashsword/blog/\\d+")
@@ -140,10 +140,10 @@ Annotation detail description see below in the comments webmagic-extension modul
 
 ## Webmagic-core
 
-webmagic-core is the core framework reptiles, reptile includes only a core function of the functional modules. webmagic-core goal is to become a textbook pages reptile-like implementation.
+webmagic-core is the core framework crawlers, crawler includes only a core function of the functional modules. webmagic-core goal is to become a textbook pages crawler-like implementation.
 
 This section is part of an excerpt from the author's blog
-[Webmagic mechanism and design principle - how to develop a Java reptile](http://my.oschina.net/flashsword/blog/145796).
+[Webmagic mechanism and design principle - how to develop a Java crawler](http://my.oschina.net/flashsword/blog/145796).
 
 ### Webmagic-core module division
 
@@ -154,7 +154,7 @@ webmagic-core reference module division scrapy, divided into Spider (crawler ent
 
 #### Spider classes (core dispatch)
 
-** Spider ** reptile entry classes, interfaces, call Spider uses a chain of API design, other features all through the interface injection Spider realized, the following is to start a more complex example of Spider.
+** Spider ** crawler entry classes, interfaces, call Spider uses a chain of API design, other features all through the interface injection Spider realized, the following is to start a more complex example of Spider.
 
 ```java
     Spider.create(sinaBlogProcessor)
@@ -189,7 +189,7 @@ Page analysis is vertical crawlers need to customize parts. In webmagic-core, th
 
 * Public void process (Page page)
 
-By ** Page ** object operation, and reptiles logic. Page objects include two of the most important methods: addTargetRequests() can add a URL to be crawled queue, put() can save the results for subsequent processing.
+By ** Page ** object operation, and crawlers logic. Page objects include two of the most important methods: addTargetRequests() can add a URL to be crawled queue, put() can save the results for subsequent processing.
 Page data can be obtained through Page.getHtml() and Page.getUrl().
 
 * Public Site getSite()
@@ -271,12 +271,12 @@ There are several Downloader implementation:
 * HttpClientDownloader
 
 ** Apache HttpClient ** integrates the Downloader. Apache HttpClient (after 4.0 into HttpCompenent project) is a powerful Java http downloader, 
-which supports custom HTTP header (for reptiles more useful is the User-agent, cookie, etc.), automatic redirect, connection multiplexing, cookie reservations, set many powerful agents.
+which supports custom HTTP header (for crawlers more useful is the User-agent, cookie, etc.), automatic redirect, connection multiplexing, cookie reservations, set many powerful agents.
 
 * SeleniumDownloader
 
 For some Javascript dynamically loaded web pages using only http Simulation tool, and can not get to the content of the page. 
-This line of thought, there are two: one is unraveling analysis js logic, then reptiles to reproduce it; the other is: a built-in browser, 
+This line of thought, there are two: one is unraveling analysis js logic, then crawlers to reproduce it; the other is: a built-in browser, 
 direct access to the last page has been loaded. ** Webmagic-selenium ** Selenium integrated package to SeleniumDownloader, can crawl dynamic loading the page. 
 Using selenium need to install some native tools, concrete steps can refer to the author's blog [use Selenium to crawl dynamic loading pages](http://my.oschina.net/flashsword/blog/147334)
 
@@ -339,7 +339,7 @@ Because JFinal not currently support maven, so do not put this code in to webmag
 
 ## Webmagic-extension
 
-webmagic-extension is functional blocks in order to develop more convenient reptile achieved. These fully functional webmagic-core-based framework, including the preparation of notes in the form of reptiles, paging, distributed functions.
+webmagic-extension is functional blocks in order to develop more convenient crawler achieved. These fully functional webmagic-core-based framework, including the preparation of notes in the form of crawlers, paging, distributed functions.
 
 ### Comment module
 
@@ -432,7 +432,7 @@ You can also write a class that implements the `ObjectFormatter` interface, to c
 AfterExtractor interface is a complement to the insufficient capacity to extract annotation mode. After realization AfterExtractor interface will be finished in the use of annotations populate fields ** ** call ** afterProcess() ** method, this method can directly access the decimated fields need to extract complementary fields, and even do some simple and the output of persistence operations (not very recommended). This section can refer to [webmagic binding JFinal persisted to the piece of code database](http://www.oschina.net/code/snippet_190591_23456).
 
 * #### OOSpider
-OOSpider entrance annotation type reptiles, called here **create()** method OschinaBlog this class was added to the extraction of the reptile, here it is can pass more than one class, for example:
+OOSpider entrance annotation type crawlers, called here **create()** method OschinaBlog this class was added to the extraction of the crawler, here it is can pass more than one class, for example:
 
 ```java
 		OOSpider.create(
@@ -450,7 +450,7 @@ PageModelPipeline now includes `ConsolePageModelPipeline`,`JsonFilePageModelPipe
 
 * #### Tab
 
-Individual data processing tab (for example, a single press multiple pages) is a reptile troublesome issue. webmagic tab for the current solution is: In annotation mode, Model by implementing ** PagedModel ** interface, and the introduction of PagedPipeline to achieve as the first Pipeline. Specific reference webmagic-samples can grab the code Netease news:? ** Us.codecraft.webmagic.model.samples.News163 **.
+Individual data processing tab (for example, a single press multiple pages) is a crawler troublesome issue. webmagic tab for the current solution is: In annotation mode, Model by implementing ** PagedModel ** interface, and the introduction of PagedPipeline to achieve as the first Pipeline. Specific reference webmagic-samples can grab the code Netease news:? ** Us.codecraft.webmagic.model.samples.News163 **.
 
-About tab, there is an article for [some thoughts about reptiles implement paging](http://my.oschina.net/flashsword/blog/150039) a detailed description of webmagic tab implementation.
+About tab, there is an article for [some thoughts about crawlers implement paging](http://my.oschina.net/flashsword/blog/150039) a detailed description of webmagic tab implementation.
 Currently distributed paging feature is not implemented if the implementation RedisScheduler distributed crawling, please do not use the paging function.
