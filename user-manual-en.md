@@ -218,12 +218,12 @@ for example: `" // div [@ class = 'BlogStat'] / regex ( '\\ d + - \\ d + - \\ d 
 
 |functions	        	|Description|
 |----|----|
-|text (n)	        	|n-th text node (0, it means all)
-|allText()	        	|all the text, including sub-node
-|tidyText()	        	|includes all text child nodes, and intelligently wrap
-|html()	        	    |internal html (excluding the current tag itself)
-|outerHtml()	        	|external html (including the current tag itself)
-|regex (@ attr, expr, group)	|        	regular expressions, @ attr attribute is extracted (can be omitted), expr is an expression content, group capture group (can be omitted, the default is 0)
+|text (n)	        	|n-th text node (0, it means all)|
+|allText()	        	|all the text, including sub-node|
+|tidyText()	        	|includes all text child nodes, and intelligently wrap|
+|html()	        	    |internal html (excluding the current tag itself)|
+|outerHtml()	        	|external html (including the current tag itself)|
+|regex (@ attr, expr, group)	|        	regular expressions, @ attr attribute is extracted (can be omitted), expr is an expression content, group capture group (can be omitted, the default is 0)|
 
 Based Saxon, webmagic provides support XPath2.0 syntax. XPath2.0 syntax supports internal functions, logic control, 
 is a complete language, if you are familiar with XPath2.0 grammar, it touches a try (the need to introduce **webmagic-saxon** package).
@@ -259,7 +259,7 @@ Using selenium need to install some native tools, concrete steps can refer to th
 
 #### Scheduler (URL management)
 
-** Scheduler** is webmagic management module, by implementing Scheduler can customize your URL Manager. Scheduler consists of two main methods:
+**Scheduler** is webmagic management module, by implementing Scheduler can customize your URL Manager. Scheduler consists of two main methods:
 
 * Public void push (Request request, Task task)
 
@@ -286,11 +286,11 @@ Use redis storage URL queue. By using the same redis storage server URL, webmagi
 
 #### Pipeline (subsequent processing and persistence)
 
-** Pipeline** is the final result of extraction output and persistence interface. It includes only one method:
+**Pipeline** is the final result of extraction output and persistence interface. It includes only one method:
 
 * Public void process (ResultItems resultItems, Task task)
 
-** ResultItems** is an integrated object extraction results. By ResultItems.get (key) drawing result can be obtained. Task is also used to distinguish between objects of different tasks.
+**ResultItems** is an integrated object extraction results. By ResultItems.get (key) drawing result can be obtained. Task is also used to distinguish between objects of different tasks.
 
 webmagic Pipeline includes the following implementation:
 
