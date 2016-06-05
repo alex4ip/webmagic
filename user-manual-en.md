@@ -216,37 +216,14 @@ webmagic use of XPath parse the author of another open source project: Based Jso
 Use these functions are XPath end add `/ name-of-function()`, 
 for example: `" // div [@ class = 'BlogStat'] / regex ( '\\ d + - \\ d + - \\ d + \\ s + \\ d +: \\ d + ') "`.
 
-<table>
-    <tr>
-        <td width = "100"> functions <td>
-        <td> Description <td>
-    <tr>
-    <tr>
-        <td width = "100"> text (n) <td>
-        <td> n-th text node (0, it means all) <td>
-    <tr>
-        <tr>
-        <td width = "100"> allText() <td>
-        <td> all the text, including sub-node <td>
-    <tr>
-    <tr>
-        <tr>
-        <td width = "100"> tidyText() <td>
-        <td> includes all text child nodes, and intelligently wrap <td>
-    <tr>
-    <tr>
-        <td width = "100"> html() <td>
-        <td> internal html (excluding the current tag itself) <td>
-    <tr>
-    <tr>
-        <td width = "100"> outerHtml() <td>
-        <td> external html (including the current tag itself) <td>
-    <tr>
-    <tr>
-        <td width = "100"> regex (@ attr, expr, group) <td>
-        <td> regular expressions, @ attr attribute is extracted (can be omitted), expr is an expression content, group capture group (can be omitted, the default is 0) <td>
-    <tr>
-<table>
+|functions	        	|Description|
+|----|----|
+|text (n)	        	|n-th text node (0, it means all)
+|allText()	        	|all the text, including sub-node
+|tidyText()	        	|includes all text child nodes, and intelligently wrap
+|html()	        	    |internal html (excluding the current tag itself)
+|outerHtml()	        	|external html (including the current tag itself)
+|regex (@ attr, expr, group)	|        	regular expressions, @ attr attribute is extracted (can be omitted), expr is an expression content, group capture group (can be omitted, the default is 0)
 
 Based Saxon, webmagic provides support XPath2.0 syntax. XPath2.0 syntax supports internal functions, logic control, 
 is a complete language, if you are familiar with XPath2.0 grammar, it touches a try (the need to introduce ** webmagic-saxon ** package).
