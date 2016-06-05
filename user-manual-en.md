@@ -30,21 +30,21 @@ webmagic use maven dependency management, add the corresponding dependencies in 
 
 webmagic consists of two packages:
 
-* ** Webmagic-core **
+* **Webmagic-core**
 
 webmagic core part, only contains the basic modules and basic crawler extractor. webmagic-core goal is to become a textbook pages crawler-like implementation.
 
-* ** Webmagic-extension **
+* **Webmagic-extension**
 
 webmagic expansion module that provides some of the more convenient tool written in crawlers. Including annotation format definition crawlers, JSON, distributed and other support.
 
 webmagic also includes two expansion packs available, because these two packages are dependent on a relatively heavyweight tool, it pulled out from the main package, these packages need to download the source code after compile it yourself:
 
-* ** Webmagic-saxon **
+* **Webmagic-saxon**
 
 webmagic and Saxon binding module. Saxon is a XPath, XSLT analytical tools, webmagic rely Saxon to XPath2.0 parsing support.
 
-* ** Webmagic-selenium **
+* **Webmagic-selenium**
 
 webmagic and Selenium combined modules. Selenium is an analog browser page rendering tools, webmagic rely Selenium crawl dynamic pages.
 
@@ -56,7 +56,7 @@ Do not use maven users can download binary jar included with the package version
 
 git clone http://git.oschina.net/flashsword20/webmagic.git
 
-In ** lib ** directory, there are all the project dependencies jar package, you can import directly in the IDE.
+In **lib** directory, there are all the project dependencies jar package, you can import directly in the IDE.
 
 --------
 
@@ -154,7 +154,7 @@ webmagic-core reference module division scrapy, divided into Spider (crawler ent
 
 #### Spider classes (core dispatch)
 
-** Spider ** crawler entry classes, interfaces, call Spider uses a chain of API design, other features all through the interface injection Spider realized, the following is to start a more complex example of Spider.
+**Spider** crawler entry classes, interfaces, call Spider uses a chain of API design, other features all through the interface injection Spider realized, the following is to start a more complex example of Spider.
 
 ```java
     Spider.create(sinaBlogProcessor)
@@ -185,18 +185,18 @@ Spider also includes a method of test (String url), the only method to grab a se
     
 #### PageProcessor (page analysis and link extraction)
 
-Page analysis is vertical crawlers need to customize parts. In webmagic-core, through the realization ** PageProcessor ** interfaces to implement custom crawlers. PageProcessor has two core methods: public void process (Page page) and public Site getSite().
+Page analysis is vertical crawlers need to customize parts. In webmagic-core, through the realization **PageProcessor** interfaces to implement custom crawlers. PageProcessor has two core methods: public void process (Page page) and public Site getSite().
 
 * Public void process (Page page)
 
-By ** Page ** object operation, and crawlers logic. Page objects include two of the most important methods: addTargetRequests() can add a URL to be crawled queue, put() can save the results for subsequent processing.
+By **Page** object operation, and crawlers logic. Page objects include two of the most important methods: addTargetRequests() can add a URL to be crawled queue, put() can save the results for subsequent processing.
 Page data can be obtained through Page.getHtml() and Page.getUrl().
 
 * Public Site getSite()
 
-** Site ** crawler domain objects define the start address, crawl space, coding and other information.
+**Site** crawler domain objects define the start address, crawl space, coding and other information.
 
-** Selector ** webmagic is to simplify the development of stand-alone modules page extraction, is the main focus of webmagic-core. Here we integrate CSS Selector, XPath and regular expressions, and can be chained extraction.
+**Selector** webmagic is to simplify the development of stand-alone modules page extraction, is the main focus of webmagic-core. Here we integrate CSS Selector, XPath and regular expressions, and can be chained extraction.
 
 ```java
     //content with other crawlers tools to extract text
@@ -209,7 +209,7 @@ Page data can be obtained through Page.getHtml() and Page.getUrl().
 
 webmagic comprises a body of the page for automatic extraction of class **SmartContentSelector**. 
 I believe it will be used Evernote Clearly automatic text extraction technology is impressive. 
-This technique is also called ** Readability **. Of course webmagic achieve Readability is still relatively rough, but there are still some learning value.
+This technique is also called **Readability**. Of course webmagic achieve Readability is still relatively rough, but there are still some learning value.
 
 webmagic use of XPath parse the author of another open source project: Based Jsoup the XPath parser 
 [Xsoup](https://github.com/code4craft/xsoup), Xsoup on XPath syntax of some extensions to support some custom function. 
@@ -226,17 +226,17 @@ for example: `" // div [@ class = 'BlogStat'] / regex ( '\\ d + - \\ d + - \\ d 
 |regex (@ attr, expr, group)	|        	regular expressions, @ attr attribute is extracted (can be omitted), expr is an expression content, group capture group (can be omitted, the default is 0)
 
 Based Saxon, webmagic provides support XPath2.0 syntax. XPath2.0 syntax supports internal functions, logic control, 
-is a complete language, if you are familiar with XPath2.0 grammar, it touches a try (the need to introduce ** webmagic-saxon ** package).
+is a complete language, if you are familiar with XPath2.0 grammar, it touches a try (the need to introduce **webmagic-saxon** package).
 
-** Webmagic-samples ** bag with some of them as a site customized PageProcessor, for learning purposes.
+**Webmagic-samples** bag with some of them as a site customized PageProcessor, for learning purposes.
 
 #### Downloader (download page)
 
-** Downloader ** webmagic is the interface in the download page, the main method:
+**Downloader** webmagic is the interface in the download page, the main method:
 
 * Public Page download (Request request, Task task)
 
-** Request ** object encapsulates the URL to be crawled and other information, 
+**Request** object encapsulates the URL to be crawled and other information,
 while Page contains the Html and other information pages are downloaded. Task is a wrapper task corresponding abstract interface Site information.
 
 * Public void setThread (int thread)
@@ -247,19 +247,19 @@ There are several Downloader implementation:
 
 * HttpClientDownloader
 
-** Apache HttpClient ** integrates the Downloader. Apache HttpClient (after 4.0 into HttpCompenent project) is a powerful Java http downloader, 
+**Apache HttpClient** integrates the Downloader. Apache HttpClient (after 4.0 into HttpCompenent project) is a powerful Java http downloader,
 which supports custom HTTP header (for crawlers more useful is the User-agent, cookie, etc.), automatic redirect, connection multiplexing, cookie reservations, set many powerful agents.
 
 * SeleniumDownloader
 
 For some Javascript dynamically loaded web pages using only http Simulation tool, and can not get to the content of the page. 
 This line of thought, there are two: one is unraveling analysis js logic, then crawlers to reproduce it; the other is: a built-in browser, 
-direct access to the last page has been loaded. ** Webmagic-selenium ** Selenium integrated package to SeleniumDownloader, can crawl dynamic loading the page. 
+direct access to the last page has been loaded. **Webmagic-selenium** Selenium integrated package to SeleniumDownloader, can crawl dynamic loading the page.
 Using selenium need to install some native tools, concrete steps can refer to the author's blog [use Selenium to crawl dynamic loading pages](http://my.oschina.net/flashsword/blog/147334)
 
 #### Scheduler (URL management)
 
-** Scheduler ** is webmagic management module, by implementing Scheduler can customize your URL Manager. Scheduler consists of two main methods:
+** Scheduler** is webmagic management module, by implementing Scheduler can customize your URL Manager. Scheduler consists of two main methods:
 
 * Public void push (Request request, Task task)
 
@@ -286,11 +286,11 @@ Use redis storage URL queue. By using the same redis storage server URL, webmagi
 
 #### Pipeline (subsequent processing and persistence)
 
-** Pipeline ** is the final result of extraction output and persistence interface. It includes only one method:
+** Pipeline** is the final result of extraction output and persistence interface. It includes only one method:
 
 * Public void process (ResultItems resultItems, Task task)
 
-** ResultItems ** is an integrated object extraction results. By ResultItems.get (key) drawing result can be obtained. Task is also used to distinguish between objects of different tasks.
+** ResultItems** is an integrated object extraction results. By ResultItems.get (key) drawing result can be obtained. Task is also used to distinguish between objects of different tasks.
 
 webmagic Pipeline includes the following implementation:
 
@@ -300,7 +300,7 @@ Direct output to the console, used for testing.
 
 * FilePipeline
 
-Output to a file, save each URL to a separate page to MD5 result URL as the file name. The constructor `public FilePipeline (String path)` define the storage path, use the following documents ** persistent classes, most of them use this method to specify a path **.
+Output to a file, save each URL to a separate page to MD5 result URL as the file name. The constructor `public FilePipeline (String path)` define the storage path, use the following documents **persistent classes, most of them use this method to specify a path**.
 
 * JsonFilePipeline
 
@@ -358,37 +358,38 @@ By way of comment it is actually a PageProcessor implementation --ModelPageProce
 
 Notes section includes the following:
 
+
 * #### TargetUrl
 
-"TargetUrl" indicates that the Model corresponds to crawl the URL, which contains two meanings: URL comply with this condition will be added to crawl queue; URL comply with this condition will be crawled this Model. ** SourceRegion ** TargetUrl can specify the URL of the extraction area (only supported XPath).
+    "TargetUrl" indicates that the Model corresponds to crawl the URL, which contains two meanings: URL comply with this condition will be added to crawl queue; URL comply with this condition will be crawled this Model.**SourceRegion** TargetUrl can specify the URL of the extraction area (only supported XPath).
 
-TargetUrl using regular expression matching URL "http://my.oschina.net/flashsword/blog/150039" format. webmagic regular expression is modified, representing the character only and do not represent any character "\ *" represents the, for example, "http". "". "" \ *. ": // \ * .oschina.net / \ * "represents the URL oschina all second-level domain under.
+    TargetUrl using regular expression matching URL "http://my.oschina.net/flashsword/blog/150039" format. webmagic regular expression is modified, representing the character only and do not represent any character "\ *" represents the, for example, "http". "". "" \ *. ": // \ * .oschina.net / \ * "represents the URL oschina all second-level domain under.
 
-And there is a similar TargetUrl ** HelpUrl **, HelpUrl said: only crawl the URL link is used to extract, it is not content extraction. For example blog page text corresponds TargetUrl, and the list page corresponds HelpUrl.
+    And there is a similar TargetUrl **HelpUrl**, HelpUrl said: only crawl the URL link is used to extract, it is not content extraction. For example blog page text corresponds TargetUrl, and the list page corresponds HelpUrl.
 
 * #### ExtractBy
 
-* #### For the field
+    * #### For the field
 
-"ExtractBy" can be used for classes and fields. When used in the field defined field extraction rules. Extraction rules used by default [** XPath **](http://www.w3school.com.cn/xpath/), you can also choose to use CSS Selector, regular expression (by setting type).
+        "ExtractBy" can be used for classes and fields. When used in the field defined field extraction rules. Extraction rules used by default [**XPath**](http://www.w3school.com.cn/xpath/), you can also choose to use CSS Selector, regular expression (by setting type).
 
-ExtractBy several extended attributes. ** Multi ** indicates whether to draw a list, of course, is set to multi, you need a List field to accommodate it. ** Notnull ** it said that this field does not permit null, if null to discard the entire object.
+        ExtractBy several extended attributes. **Multi** indicates whether to draw a list, of course, is set to multi, you need a List field to accommodate it. **Notnull **it said that this field does not permit null, if null to discard the entire object.
 
-* Class for ####
+    * #### Class for
 
-"ExtractBy" for the class, define a field extraction area. Still supported when used in multi class, multi indicates that a page can be extracted to multiple objects.
+        "ExtractBy" for the class, define a field extraction area. Still supported when used in multi class, multi indicates that a page can be extracted to multiple objects.
 
-* #### ExtractByUrl
+    * #### ExtractByUrl
 
-ExtractByUrl indicates extracting information from the URL, only supports regular expressions.
+        ExtractByUrl indicates extracting information from the URL, only supports regular expressions.
 
-* #### ComboExtract
+    * #### ComboExtract
 
-ComboExtract ExtractBy is a supplement, will support a combination of extraction rules with and or or form.
+        ComboExtract ExtractBy is a supplement, will support a combination of extraction rules with and or or form.
 
-#### * Type conversion
+* #### Type conversion
 
-webmagic annotation mode support for the drawing result type conversion, so that the result does not require extraction of type String, but can be any type. webmagic built basic types of support (need to ensure that the drawing result can be converted to the corresponding type).
+    webmagic annotation mode support for the drawing result type conversion, so that the result does not require extraction of type String, but can be any type. webmagic built basic types of support (need to ensure that the drawing result can be converted to the corresponding type).
 
 ```java
 	    @ExtractBy("//ul[@class='pagehead-actions']/li[1]//a[@class='social-count js-social-count']/text()")
@@ -406,10 +407,10 @@ You can also write a class that implements the `ObjectFormatter` interface, to c
 
 * #### AfterExtractor
 
-AfterExtractor interface is a complement to the insufficient capacity to extract annotation mode. After realization AfterExtractor interface will be finished in the use of annotations populate fields ** ** call ** afterProcess() ** method, this method can directly access the decimated fields need to extract complementary fields, and even do some simple and the output of persistence operations (not very recommended). This section can refer to [webmagic binding JFinal persisted to the piece of code database](http://www.oschina.net/code/snippet_190591_23456).
+    AfterExtractor interface is a complement to the insufficient capacity to extract annotation mode. After realization AfterExtractor interface **will be finished in the use of annotations populate fields** call **afterProcess()** method, this method can directly access the decimated fields need to extract complementary fields, and even do some simple and the output of persistence operations (not very recommended). This section can refer to [webmagic binding JFinal persisted to the piece of code database](http://www.oschina.net/code/snippet_190591_23456).
 
 * #### OOSpider
-OOSpider entrance annotation type crawlers, called here **create()** method OschinaBlog this class was added to the extraction of the crawler, here it is can pass more than one class, for example:
+    OOSpider entrance annotation type crawlers, called here **create()** method OschinaBlog this class was added to the extraction of the crawler, here it is can pass more than one class, for example:
 
 ```java
 		OOSpider.create(
@@ -421,13 +422,13 @@ OOSpider entrance annotation type crawlers, called here **create()** method Osch
 OOSpider will resolve according TargetUrl call different Model.
 
 * #### PageModelPipeline
-You can choose to define PageModelPipeline result output. Here new ConsolePageModelPipeline() is an implementation PageModelPipeline, the result will be output to the console.
+    You can choose to define PageModelPipeline result output. Here new ConsolePageModelPipeline() is an implementation PageModelPipeline, the result will be output to the console.
 
-PageModelPipeline now includes `ConsolePageModelPipeline`,`JsonFilePageModelPipeline`, `FilePageModelPipeline` three realized.
+    PageModelPipeline now includes `ConsolePageModelPipeline`,`JsonFilePageModelPipeline`, `FilePageModelPipeline` three realized.
 
 * #### Tab
 
-Individual data processing tab (for example, a single press multiple pages) is a crawler troublesome issue. webmagic tab for the current solution is: In annotation mode, Model by implementing ** PagedModel ** interface, and the introduction of PagedPipeline to achieve as the first Pipeline. Specific reference webmagic-samples can grab the code Netease news:? ** Us.codecraft.webmagic.model.samples.News163 **.
+    Individual data processing tab (for example, a single press multiple pages) is a crawler troublesome issue. webmagic tab for the current solution is: In annotation mode, Model by implementing **PagedModel**interface, and the introduction of PagedPipeline to achieve as the first Pipeline. Specific reference webmagic-samples can grab the code Netease news:? **Us.codecraft.webmagic.model.samples.News163**.
 
-About tab, there is an article for [some thoughts about crawlers implement paging](http://my.oschina.net/flashsword/blog/150039) a detailed description of webmagic tab implementation.
-Currently distributed paging feature is not implemented if the implementation RedisScheduler distributed crawling, please do not use the paging function.
+    About tab, there is an article for [some thoughts about crawlers implement paging](http://my.oschina.net/flashsword/blog/150039) a detailed description of webmagic tab implementation.
+    Currently distributed paging feature is not implemented if the implementation RedisScheduler distributed crawling, please do not use the paging function.
